@@ -6,9 +6,9 @@ public class Driver {
 
 		MonthWindow monthWindow = new MonthWindow(april);
 
-		for (int i = 1; i <= april.getEndDate(); i++) {
-			april.addDay(i, new WaterUsage(new double[] {i, 0, 0, 0, 0}));
-		}
+//		for (int i = 1; i <= april.getEndDate(); i++) {
+//			april.addDay(i, new WaterUsage(new double[] {i, 0, 0, 0, 0}));
+//		}
 
 	}
 

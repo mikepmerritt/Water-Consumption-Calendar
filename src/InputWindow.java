@@ -11,7 +11,7 @@ public class InputWindow extends JFrame {
     private DayWindow dayWindow;
 
     private JPanel mainPanel, insidePanel, bottomPanel;
-    private JLabel heading;
+    private JLabel heading, errorLabel;
     private JLabel[] questions;
     private JTextField[] inputFields;
     private JButton submitButton, backButton;
@@ -33,7 +33,7 @@ public class InputWindow extends JFrame {
         mainPanel = new JPanel(new BorderLayout());
         bottomPanel = new JPanel();
 
-        backButton = new JButton("Back to Month");
+        backButton = new JButton("Back to Day");
 
         backButton.addActionListener(new ActionListener() {
             @Override
@@ -59,8 +59,34 @@ public class InputWindow extends JFrame {
             insidePanel.add(questions[i]);
             insidePanel.add(inputFields[i]);
         }
-        submitButton = new JButton("Submit");
 
+        submitButton = new JButton("Submit");
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // fetch values from fields
+                double[] inputs = new double[inputFields.length];
+                try {
+                    for (int i = 0; i < inputFields.length && i < inputs.length; i++) {
+                        inputs[i] = Double.parseDouble(inputFields[i].getText());
+                    }
+                    // construct new water usage data
+                    WaterUsage newData = new WaterUsage(inputs);
+                    // either add or overwrite calendar
+                    if (!calendar.addDay(day, newData)) {
+                        calendar.overwriteDay(day, newData);
+                    }
+                }
+                catch (NumberFormatException err) {
+                    errorLabel.setText("One or more fields could not be understood.");
+                }
+            }
+        });
+
+        errorLabel = new JLabel();
+        errorLabel.setForeground(Color.RED);
+
+        bottomPanel.add(errorLabel);
         bottomPanel.add(submitButton);
         bottomPanel.add(backButton);
 
