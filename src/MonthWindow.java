@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 public class MonthWindow extends JFrame {
 
     private Calendar calendar;
+    private DayWindow dayWindow;
 
     private JPanel mainPanel, insidePanel;
     private JLabel heading;
@@ -20,10 +21,11 @@ public class MonthWindow extends JFrame {
             new JLabel("Sat", SwingConstants.CENTER)
     };
 
-    public MonthWindow(Calendar calendar) {
+    public MonthWindow(Calendar calendar, DayWindow dayWindow) {
         super("Month View");
 
         this.calendar = calendar;
+        this.dayWindow = dayWindow;
 
         heading = new JLabel(calendar.getName(), SwingConstants.CENTER);
         heading.setFont(new Font(heading.getFont().getName(), Font.PLAIN, 24));
@@ -72,7 +74,8 @@ public class MonthWindow extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println(calendar.getDay(day).getConsumption());
+            //System.out.println(calendar.getDay(day).getConsumption());
+            dayWindow.loadDay(day);
         }
     }
 

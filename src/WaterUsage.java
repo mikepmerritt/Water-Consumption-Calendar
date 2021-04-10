@@ -1,7 +1,7 @@
 public class WaterUsage {
 
     private double consumption;
-    private final static String[] questions = {
+    public final static String[] QUESTIONS = {
             "Question 1:",
             "Question 2:",
             "Question 3:"
@@ -18,6 +18,10 @@ public class WaterUsage {
 
     public double getConsumption() {
         return consumption;
+    }
+
+    public double getAnswer(int question) {
+        return inputs[question];
     }
 
 }
