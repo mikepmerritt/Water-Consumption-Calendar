@@ -15,7 +15,7 @@ public class DayWindow extends JFrame {
 
     private JPanel mainPanel, insidePanel, bottomPanel;
     private JLabel heading;
-    private JLabel[] questions;
+    private JLabel[] questions, gallonLabels;
     private JTextField[] inputFields;
     private JButton changeButton, backButton;
 
@@ -61,11 +61,17 @@ public class DayWindow extends JFrame {
                 inputFields[i].setEditable(false);
                 inputFields[i].setText("" + calendar.getDay(day).getAnswer(i));
             }
+            
+            gallonLabels = new JLabel[questions.length];
+            for (int i = 0; i < gallonLabels.length; i++) {
+            	gallonLabels[i] = new JLabel("Gallons used: " + ((int) ((Double.parseDouble(inputFields[i].getText()) * WaterUsage.DEFAULT_MULTIPLIERS[i]) * 10) / 10.0)  + " gallons");
+            }
 
-            insidePanel = new JPanel(new GridLayout(questions.length, 2, 5, 5));
+            insidePanel = new JPanel(new GridLayout(questions.length, 3, 5, 5));
             for (int i = 0; i < questions.length && i < inputFields.length; i++) {
                 insidePanel.add(questions[i]);
                 insidePanel.add(inputFields[i]);
+                insidePanel.add(gallonLabels[i]);
             }
             changeButton = new JButton("Overwrite Data");
         }
