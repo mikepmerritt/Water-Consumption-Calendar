@@ -9,7 +9,7 @@ public class MonthWindow extends JFrame {
     private DayWindow dayWindow;
 
     private JPanel mainPanel, insidePanel;
-    private JLabel heading;
+    private JLabel heading, averageConsumption;
     private JButton[] buttons;
     private JLabel[] days = {
             new JLabel("Sun", SwingConstants.CENTER),
@@ -49,13 +49,17 @@ public class MonthWindow extends JFrame {
             insidePanel.add(dayButton);
         }
 
+        averageConsumption = new JLabel("", SwingConstants.CENTER);
+        updateAverageConsumption();
+
         mainPanel.add(insidePanel, BorderLayout.CENTER);
         mainPanel.add(heading, BorderLayout.NORTH);
+        mainPanel.add(averageConsumption, BorderLayout.SOUTH);
 
         // spacing
         mainPanel.add(new JPanel(), BorderLayout.WEST);
         mainPanel.add(new JPanel(), BorderLayout.EAST);
-        mainPanel.add(new JPanel(), BorderLayout.SOUTH);
+
 
         this.add(mainPanel);
         this.pack();
@@ -67,7 +71,25 @@ public class MonthWindow extends JFrame {
         this.dayWindow = dayWindow;
     }
 
+    public void updateAverageConsumption() {
+        if (calendar.isEmpty()) {
+            averageConsumption.setText("Average consumption is 0 gallons of water per day.");
+        }
+        else {
+            double avg = 0;
+            int days = 0;
+            for (int i = 1; i < calendar.getEndDate(); i++) {
+                avg += calendar.getDay(i) != null ? calendar.getDay(i).getConsumption() : 0;
+                days += calendar.getDay(i) != null ? 1 : 0;
+            }
+            avg /= days;
+            avg = (int) (avg * 10) / 10.0;
+            averageConsumption.setText("Average consumption is " + avg + " gallons of water per day.");
+        }
+    }
+
     public void reload() {
+        updateAverageConsumption();
         this.setVisible(true);
     }
 
