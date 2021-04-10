@@ -60,7 +60,7 @@ public class MonthWindow extends JFrame {
 
         this.add(mainPanel);
         this.pack();
-        this.setDefaultCloseOperation(HIDE_ON_CLOSE);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
     }
 
@@ -74,7 +74,8 @@ public class MonthWindow extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            //System.out.println(calendar.getDay(day).getConsumption());
+            System.out.println(calendar.getDay(day).getConsumption());
+            dayWindow = new DayWindow(calendar);
             dayWindow.loadDay(day);
         }
     }

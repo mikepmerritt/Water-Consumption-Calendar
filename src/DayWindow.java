@@ -15,11 +15,13 @@ public class DayWindow extends JFrame {
 
         this.calendar = calendar;
 
-        this.setDefaultCloseOperation(HIDE_ON_CLOSE);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setVisible(false);
     }
 
     public void loadDay(int day) {
+    	//this.removeAll();
+    	
         heading = new JLabel("Day " + day, SwingConstants.CENTER);
         heading.setFont(new Font(heading.getFont().getName(), Font.PLAIN, 24));
 
@@ -66,10 +68,11 @@ public class DayWindow extends JFrame {
         // spacing
         mainPanel.add(new JPanel(), BorderLayout.WEST);
         mainPanel.add(new JPanel(), BorderLayout.EAST);
-
+        
         this.add(mainPanel);
         this.pack();
         this.setVisible(true);
+        
     }
 
 }
