@@ -4,10 +4,12 @@ public class Calendar {
 
     private HashMap<Integer, WaterUsage> usageMap;
     private int startDay, endDate;
+    private String name;
 
-    public Calendar(int startDay, int endDate) {
+    public Calendar(int startDay, int endDate, String name) {
         this.startDay = startDay % 7;
         this.endDate = endDate;
+        this.name = name;
     }
 
     public WaterUsage getDay(int day) {
@@ -35,6 +37,10 @@ public class Calendar {
 
     public int getEndDate() {
         return endDate;
+    }
+
+    public String getName() {
+        return name;
     }
 
 }

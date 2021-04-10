@@ -3,7 +3,7 @@ public class Driver {
 
 	public static void main(String[] args) {
 		System.out.println("April");
-		Calendar april = new Calendar(4, 30);
+		Calendar april = new Calendar(4, 30, "Water Consumption - April");
 
 		// these loops can be reused to fill in a grid for the month view
 		for (int i = 0; i < april.getStartDay(); i++) {
@@ -16,6 +16,8 @@ public class Driver {
 				System.out.println(); // wrapping to next line
 			}
 		}
+
+		new MonthWindow(april);
 
 	}
 
