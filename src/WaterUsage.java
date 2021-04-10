@@ -7,14 +7,21 @@ public class WaterUsage {
             "Approximately how long (in minutes) did you shower for today?",
             "Approximately how long (in minutes) did you use the bathroom sink today?",
             "Approximately how long (in minutes) did you use the kitchen sink today?"
-    }; // fill in with question strings later
+    };
+    public final static double[] DEFAULT_MULTIPLIERS = {
+    		1.6,
+    		14.0,
+    		2.1,
+    		1.5,
+    		2.2
+    };
     private double[] inputs;
 
     public WaterUsage(double[] inputs) {
         consumption = 0;
         this.inputs = inputs;
-        for (double value : inputs) {
-            consumption += value;
+        for (int i = 0; i < inputs.length; i++) {
+        	consumption += inputs[i] * DEFAULT_MULTIPLIERS[i];
         }
     }
 
