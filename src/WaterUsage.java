@@ -1,12 +1,15 @@
 public class WaterUsage {
 
     private double consumption;
-    private int[] inputs;
+    private final static String[] questions = {
 
-    public WaterUsage(int[] inputs) {
+    }; // fill in with question strings later
+    private double[] inputs;
+
+    public WaterUsage(double[] inputs) {
         consumption = 0;
         this.inputs = inputs;
-        for (int value : inputs) {
+        for (double value : inputs) {
             consumption += value;
         }
     }
