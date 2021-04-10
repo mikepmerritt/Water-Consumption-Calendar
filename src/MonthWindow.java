@@ -21,11 +21,10 @@ public class MonthWindow extends JFrame {
             new JLabel("Sat", SwingConstants.CENTER)
     };
 
-    public MonthWindow(Calendar calendar, DayWindow dayWindow) {
+    public MonthWindow(Calendar calendar) {
         super("Month View");
 
         this.calendar = calendar;
-        this.dayWindow = dayWindow;
 
         heading = new JLabel(calendar.getName(), SwingConstants.CENTER);
         heading.setFont(new Font(heading.getFont().getName(), Font.PLAIN, 24));
@@ -64,6 +63,10 @@ public class MonthWindow extends JFrame {
         this.setVisible(true);
     }
 
+    public void addDayWindow(DayWindow dayWindow) {
+        this.dayWindow = dayWindow;
+    }
+
     private class ButtonListener implements ActionListener {
 
         private int day;
@@ -76,6 +79,7 @@ public class MonthWindow extends JFrame {
         public void actionPerformed(ActionEvent e) {
             //System.out.println(calendar.getDay(day).getConsumption());
             dayWindow.loadDay(day);
+            MonthWindow.this.setVisible(false);
         }
     }
 

@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class DayWindow extends JFrame {
 
@@ -8,7 +10,7 @@ public class DayWindow extends JFrame {
     private JLabel heading;
     private JLabel[] questions;
     private JTextField[] inputFields;
-    private JButton changeButton;
+    private JButton changeButton, backButton;
 
     public DayWindow(Calendar calendar) {
         super("Day View");
@@ -25,6 +27,15 @@ public class DayWindow extends JFrame {
 
         mainPanel = new JPanel(new BorderLayout());
         bottomPanel = new JPanel();
+
+        backButton = new JButton("Back to Month");
+
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // close this window or hide it
+            }
+        });
 
         if (calendar.getDay(day) != null) {
             questions = new JLabel[WaterUsage.QUESTIONS.length];
@@ -58,6 +69,7 @@ public class DayWindow extends JFrame {
         }
 
         bottomPanel.add(changeButton);
+        bottomPanel.add(backButton);
 
         mainPanel.add(insidePanel, BorderLayout.CENTER);
         mainPanel.add(heading, BorderLayout.NORTH);
