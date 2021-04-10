@@ -13,8 +13,8 @@ public class DayWindow extends JFrame {
 
     private int day;
 
-    private JPanel mainPanel, insidePanel, bottomPanel;
-    private JLabel heading;
+    private JPanel mainPanel, insidePanel, bottomPanel,summaryPanel, bottomButtonPanel;
+    private JLabel heading, summary, comparison;
     private JLabel[] questions, gallonLabels;
     private JTextField[] inputFields;
     private JButton changeButton, backButton;
@@ -36,7 +36,7 @@ public class DayWindow extends JFrame {
         heading.setFont(new Font(heading.getFont().getName(), Font.PLAIN, 24));
 
         mainPanel = new JPanel(new BorderLayout());
-        bottomPanel = new JPanel();
+        bottomPanel = new JPanel(new GridLayout(2, 1));
 
         backButton = new JButton("Back to Month");
 
@@ -73,6 +73,24 @@ public class DayWindow extends JFrame {
                 insidePanel.add(inputFields[i]);
                 insidePanel.add(gallonLabels[i]);
             }
+            
+            double totalGallons = calendar.getDay(day).getConsumption();
+            summary = new JLabel("You used a total of " + totalGallons + " gallons of water on these activities this day.", SwingConstants.CENTER);
+            if(50 - totalGallons < 0) {
+            	comparison = new JLabel("The average person uses around 50 gallons of water on these tasks, meaning you used an extra " + (totalGallons - 50) + " gallons of water this day.", SwingConstants.CENTER);
+            }
+            else if(50 - totalGallons > 0) {
+            	comparison = new JLabel("The average person uses around 50 gallons of water on these tasks, meaning you used " + (50 - totalGallons) + " less gallons of water than the average person this day. Good job!", SwingConstants.CENTER);
+            }
+            else {
+            	comparison = new JLabel("The average person uses around 50 gallons of water on these tasks, so you used an average amount of water this day.", SwingConstants.CENTER);
+            }
+            
+            summaryPanel = new JPanel(new GridLayout(2, 1));
+            summaryPanel.add(summary);
+            summaryPanel.add(comparison);
+            bottomPanel.add(summaryPanel);
+            
             changeButton = new JButton("Overwrite Data");
         }
         else {
@@ -96,9 +114,11 @@ public class DayWindow extends JFrame {
             }
         });
 
-        bottomPanel.add(changeButton);
-        bottomPanel.add(backButton);
-
+        bottomButtonPanel = new JPanel();
+        bottomButtonPanel.add(changeButton);
+        bottomButtonPanel.add(backButton);
+        bottomPanel.add(bottomButtonPanel);
+        
         mainPanel.add(insidePanel, BorderLayout.CENTER);
         mainPanel.add(heading, BorderLayout.NORTH);
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
@@ -134,7 +154,7 @@ public class DayWindow extends JFrame {
             heading.setFont(new Font(heading.getFont().getName(), Font.PLAIN, 24));
 
             mainPanel = new JPanel(new BorderLayout());
-            bottomPanel = new JPanel();
+            bottomPanel = new JPanel(new GridLayout(2, 1));
 
             backButton = new JButton("Back to Month");
 
@@ -170,6 +190,24 @@ public class DayWindow extends JFrame {
                 insidePanel.add(inputFields[i]);
                 insidePanel.add(gallonLabels[i]);
             }
+            
+            double totalGallons = calendar.getDay(day).getConsumption();
+            summary = new JLabel("You used a total of " + totalGallons + " gallons of water on these activities this day.", SwingConstants.CENTER);
+            if(50 - totalGallons < 0) {
+            	comparison = new JLabel("The average person uses around 50 gallons of water on these tasks, meaning you used an extra " + (totalGallons - 50) + " gallons of water this day.", SwingConstants.CENTER);
+            }
+            else if(50 - totalGallons > 0) {
+            	comparison = new JLabel("The average person uses around 50 gallons of water on these tasks, meaning you used " + (50 - totalGallons) + " less gallons of water than the average person this day. Good job!", SwingConstants.CENTER);
+            }
+            else {
+            	comparison = new JLabel("The average person uses around 50 gallons of water on these tasks, so you used an average amount of water this day.", SwingConstants.CENTER);
+            }
+            
+            summaryPanel = new JPanel(new GridLayout(2, 1));
+            summaryPanel.add(summary);
+            summaryPanel.add(comparison);
+            bottomPanel.add(summaryPanel);
+            
             changeButton = new JButton("Overwrite Data");
 
             changeButton.addActionListener(new ActionListener() {
@@ -182,8 +220,10 @@ public class DayWindow extends JFrame {
                 }
             });
 
-            bottomPanel.add(changeButton);
-            bottomPanel.add(backButton);
+            bottomButtonPanel = new JPanel();
+            bottomButtonPanel.add(changeButton);
+            bottomButtonPanel.add(backButton);
+            bottomPanel.add(bottomButtonPanel);
 
             mainPanel.add(insidePanel, BorderLayout.CENTER);
             mainPanel.add(heading, BorderLayout.NORTH);
