@@ -115,11 +115,19 @@ public class DayWindow extends JFrame {
             for (int i = 0; i < inputFields.length; i++) {
                 inputFields[i].setText("" + calendar.getDay(day).getAnswer(i));
             }
+            this.setVisible(true);
         }
         else {
             // need to regenerate entire panel
+        	// TODO: figure out why panel is flickering for a frame
+        	this.remove(mainPanel);
+        	this.remove(bottomPanel);
+        	this.remove(insidePanel);
+        	this.remove(heading);
+        	this.dispose();
+        	loadDay(day);
         }
-        this.setVisible(true);
+        
     }
 
     private class DayWindowListener implements WindowListener {

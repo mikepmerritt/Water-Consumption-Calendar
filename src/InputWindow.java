@@ -76,6 +76,8 @@ public class InputWindow extends JFrame {
                     if (!calendar.addDay(day, newData)) {
                         calendar.overwriteDay(day, newData);
                     }
+                    dayWindow.reload();
+                    InputWindow.this.dispose();
                 }
                 catch (NumberFormatException err) {
                     errorLabel.setText("One or more fields could not be understood.");
