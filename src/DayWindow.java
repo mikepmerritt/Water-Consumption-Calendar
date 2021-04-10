@@ -9,6 +9,7 @@ public class DayWindow extends JFrame {
 
     private Calendar calendar;
     private MonthWindow monthWindow;
+    private InputWindow inputWindow;
 
     private JPanel mainPanel, insidePanel, bottomPanel;
     private JLabel heading;
@@ -75,6 +76,16 @@ public class DayWindow extends JFrame {
             changeButton = new JButton("Add Data");
         }
 
+        changeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                inputWindow = new InputWindow(calendar);
+                inputWindow.addDayWindow(DayWindow.this);
+                inputWindow.loadDay(day);
+                DayWindow.this.setVisible(false);
+            }
+        });
+
         bottomPanel.add(changeButton);
         bottomPanel.add(backButton);
 
@@ -89,11 +100,14 @@ public class DayWindow extends JFrame {
         this.add(mainPanel);
         this.pack();
         this.setVisible(true);
-        
     }
 
     public void addMonthWindow(MonthWindow monthWindow) {
         this.monthWindow = monthWindow;
+    }
+
+    public void reload() {
+        this.setVisible(true);
     }
 
     private class DayWindowListener implements WindowListener {
