@@ -11,6 +11,8 @@ public class DayWindow extends JFrame {
     private MonthWindow monthWindow;
     private InputWindow inputWindow;
 
+    private int day;
+
     private JPanel mainPanel, insidePanel, bottomPanel;
     private JLabel heading;
     private JLabel[] questions;
@@ -28,6 +30,8 @@ public class DayWindow extends JFrame {
     }
 
     public void loadDay(int day) {
+        this.day = day;
+
         heading = new JLabel("Day " + day, SwingConstants.CENTER);
         heading.setFont(new Font(heading.getFont().getName(), Font.PLAIN, 24));
 
@@ -107,6 +111,14 @@ public class DayWindow extends JFrame {
     }
 
     public void reload() {
+        if (inputFields != null) {
+            for (int i = 0; i < inputFields.length; i++) {
+                inputFields[i].setText("" + calendar.getDay(day).getAnswer(i));
+            }
+        }
+        else {
+            // need to regenerate entire panel
+        }
         this.setVisible(true);
     }
 
