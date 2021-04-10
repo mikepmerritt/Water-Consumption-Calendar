@@ -7,6 +7,7 @@ public class Calendar {
     private String name;
 
     public Calendar(int startDay, int endDate, String name) {
+        usageMap = new HashMap<Integer, WaterUsage>();
         this.startDay = startDay % 7;
         this.endDate = endDate;
         this.name = name;
@@ -29,6 +30,14 @@ public class Calendar {
 
     public void overwriteDay(int day, WaterUsage usage) {
         usageMap.replace(day, usage);
+    }
+
+    // some debug stuff, dumps contents of hash map
+    public void outputAll() {
+        System.out.println(usageMap.size());
+        for (int i = 1; i <= endDate; i++) {
+            System.out.println("key: " + i + "\tvalue: " + usageMap.get(i).getConsumption());
+        }
     }
 
     public int getStartDay() {

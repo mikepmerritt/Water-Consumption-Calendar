@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class MonthWindow extends JFrame {
 
@@ -28,6 +30,7 @@ public class MonthWindow extends JFrame {
         buttons = new JButton[calendar.getEndDate()];
         for (int i = 0; i < buttons.length; i++) {
             buttons[i] = new JButton("" + (i + 1));
+            buttons[i].addActionListener(new ButtonListener(i + 1));
         }
 
         mainPanel = new JPanel(new BorderLayout());
@@ -57,6 +60,20 @@ public class MonthWindow extends JFrame {
         this.pack();
         this.setDefaultCloseOperation(HIDE_ON_CLOSE);
         this.setVisible(true);
+    }
+
+    private class ButtonListener implements ActionListener {
+
+        private int day;
+
+        public ButtonListener(int day) {
+            this.day = day;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println(calendar.getDay(day).getConsumption());
+        }
     }
 
 }
