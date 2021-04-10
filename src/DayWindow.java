@@ -2,10 +2,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
 public class DayWindow extends JFrame {
 
     private Calendar calendar;
+    private MonthWindow monthWindow;
+
     private JPanel mainPanel, insidePanel, bottomPanel;
     private JLabel heading;
     private JLabel[] questions;
@@ -22,8 +25,6 @@ public class DayWindow extends JFrame {
     }
 
     public void loadDay(int day) {
-    	//this.removeAll();
-    	
         heading = new JLabel("Day " + day, SwingConstants.CENTER);
         heading.setFont(new Font(heading.getFont().getName(), Font.PLAIN, 24));
 
@@ -36,6 +37,8 @@ public class DayWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // close this window or hide it
+                monthWindow.reload();
+                DayWindow.this.dispose();
             }
         });
 
@@ -85,6 +88,10 @@ public class DayWindow extends JFrame {
         this.pack();
         this.setVisible(true);
         
+    }
+
+    public void addMonthWindow(MonthWindow monthWindow) {
+        this.monthWindow = monthWindow;
     }
 
 }

@@ -67,6 +67,10 @@ public class MonthWindow extends JFrame {
         this.dayWindow = dayWindow;
     }
 
+    public void reload() {
+        this.setVisible(true);
+    }
+
     private class ButtonListener implements ActionListener {
 
         private int day;
@@ -77,8 +81,8 @@ public class MonthWindow extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println(calendar.getDay(day).getConsumption());
             dayWindow = new DayWindow(calendar);
+            dayWindow.addMonthWindow(MonthWindow.this);
             dayWindow.loadDay(day);
             MonthWindow.this.setVisible(false);
         }
