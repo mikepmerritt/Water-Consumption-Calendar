@@ -40,6 +40,10 @@ public class Calendar {
         }
     }
 
+    public boolean isEmpty() {
+        return usageMap.isEmpty();
+    }
+
     public int getStartDay() {
         return startDay;
     }
