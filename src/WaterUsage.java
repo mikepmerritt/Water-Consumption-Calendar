@@ -2,9 +2,11 @@ public class WaterUsage {
 
     private double consumption;
     public final static String[] QUESTIONS = {
-            "Question 1:",
-            "Question 2:",
-            "Question 3:"
+            "How many times did you flush the toilet today?",
+            "How many loads of laundry did you do today?",
+            "Approximately how long (in minutes) did you shower for today?",
+            "Approximately how long (in minutes) did you use the bathroom sink today?",
+            "Approximately how long (in minutes) did you use the kitchen sink today?"
     }; // fill in with question strings later
     private double[] inputs;
 
