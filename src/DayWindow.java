@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 public class DayWindow extends JFrame {
 
@@ -21,6 +22,7 @@ public class DayWindow extends JFrame {
         this.calendar = calendar;
 
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.addWindowListener(new DayWindowListener());
         this.setVisible(false);
     }
 
@@ -92,6 +94,27 @@ public class DayWindow extends JFrame {
 
     public void addMonthWindow(MonthWindow monthWindow) {
         this.monthWindow = monthWindow;
+    }
+
+    private class DayWindowListener implements WindowListener {
+        @Override
+        public void windowClosed(WindowEvent e) {
+            monthWindow.reload();
+        }
+
+        // unused methods required by interface
+        @Override
+        public void windowOpened(WindowEvent e) {}
+        @Override
+        public void windowClosing(WindowEvent e) {}
+        @Override
+        public void windowIconified(WindowEvent e) {}
+        @Override
+        public void windowDeiconified(WindowEvent e) {}
+        @Override
+        public void windowActivated(WindowEvent e) {}
+        @Override
+        public void windowDeactivated(WindowEvent e) {}
     }
 
 }
